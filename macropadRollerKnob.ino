@@ -10,14 +10,14 @@
  */
  
 //Set up the button grid
-const int numButtons = 9;
-const int buttonPins[numButtons] = {4,3,2,7,6,5,10,9,8}; //Array of button pins in an order that makes sense to me
+const int numButtons = 4;
+const int buttonPins[numButtons] = {16,17,19,21}; //Array of button pins in an order that makes sense to me
 //Set up all the buttons as bounce objects
-Bounce buttons[] = {Bounce(buttonPins[0],10),Bounce(buttonPins[1],10),Bounce(buttonPins[2],10),Bounce(buttonPins[3],10),Bounce(buttonPins[4],10),Bounce(buttonPins[5],10),Bounce(buttonPins[6],10),Bounce(buttonPins[7],10),Bounce(buttonPins[8],10)};
+Bounce buttons[] = {Bounce(buttonPins[0],10),Bounce(buttonPins[1],10),Bounce(buttonPins[2],10),Bounce(buttonPins[3],10)};
 
 //Set up the states
 const int numStates = 4;
-const int statePins[numStates] = {16,17,18,19}; //State LED pins, in order that makes sense
+const int statePins[numStates] = {1,2,3,4}; //State LED pins, in order that makes sense
 const int statePin = 11;
 Bounce stateButton = Bounce(statePin,10); //Set up the state buttons as a bounce object
 int state = 0; //Set the current state
@@ -73,24 +73,19 @@ void loop() {
           case 0: //Layout 1
             switch (j) {
               case 0: //copy
-                Keyboard.press(KEY_RIGHT_CTRL);
-                Keyboard.press('c');
-                delay(100);
+                Keyboard.press(KEY_MEDIA_PLAY_PAUSE);
                 Keyboard.releaseAll();
                 break;
               case 1: //paste
-                Keyboard.press(KEY_RIGHT_CTRL);
-                Keyboard.press('v');
-                delay(100);
+                Keyboard.press(KEY_MEDIA_NEXT_TRACK);
                 Keyboard.releaseAll();
                 break;
               case 2: 
-                
+                Keyboard.press(KEY_MEDIA_PREV_TRACK);
+                Keyboard.releaseAll();
                 break;
               case 3: //all
-                Keyboard.press(KEY_RIGHT_CTRL);
-                Keyboard.press('a');
-                delay(100);
+                Keyboard.press(KEY_MEDIA_MUTE);
                 Keyboard.releaseAll();
                 break;
               case 4: //
@@ -98,10 +93,6 @@ void loop() {
               case 5:
                 break;
               case 6: // save
-                Keyboard.press(KEY_RIGHT_CTRL);
-                Keyboard.press('s');
-                delay(100);
-                Keyboard.releaseAll();
                 break;
               case 7:
                 break;
@@ -214,7 +205,7 @@ void loop() {
         if(rise - fall > timeLimit){
           Keyboard.press(KEY_MEDIA_NEXT_TRACK);
         } else {
-          Keyboard.press(KEY_MEDIA_PLAY_PAUSE);
+          Keyboard.press(KEY_MEDIA_MUTE);
         }
       }
       Keyboard.releaseAll();
@@ -238,4 +229,4 @@ void loop() {
     delay(200);
     positionLeft = newLeft;
   }
-}<br>
+}
